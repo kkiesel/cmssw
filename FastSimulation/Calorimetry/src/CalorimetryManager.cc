@@ -564,8 +564,8 @@ std::map<CaloHitID,float> CalorimetryManager::applyECALScaleFactor(
   auto outMap = hitMap;
 
   // Now apply the scales
-  for( auto mapIterator=outMap.begin(); mapIterator != outMap.end(); ++mapIterator ) {
-    mapIterator->second *= scale;
+  for( auto& mapIterator : outMap ) {
+    mapIterator.second *= scale;
   }
 
   return outMap;
