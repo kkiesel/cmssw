@@ -8,7 +8,7 @@ from FastSimulation.Configuration.CommonInputs_cff import *
 ECALScaleBlock = cms.PSet(
     ECALResponceScalingParameters = cms.PSet(
         fileName = cms.untracked.string("FastSimulation/Calorimetry/data/scaleECALFastsim.root"),
-        histogramName = cms.untracked.string("energyVsEVsEta")
+        histogramName = cms.untracked.string("responseVsEVsEta")
     )
 )
 
