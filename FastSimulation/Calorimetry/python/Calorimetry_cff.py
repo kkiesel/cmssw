@@ -4,8 +4,18 @@ import FWCore.ParameterSet.Config as cms
 from FastSimulation.Calorimetry.HcalResponse_cfi import *
 from FastSimulation.Calorimetry.HSParameters_cfi import *
 from FastSimulation.Configuration.CommonInputs_cff import *
+
+ECALScaleBlock = cms.PSet(
+    ECALResponceScalingParameters = cms.PSet(
+        fileName = cms.untracked.string("FastSimulation/Calorimetry/data/scaleECALFastsim.root"),
+        histogramName = cms.untracked.string("responseVsEVsEta")
+    )
+)
+
+
 FamosCalorimetryBlock = cms.PSet(
     Calorimetry = cms.PSet(
+        ECALScaleBlock,
         HSParameterBlock,
         HCALResponseBlock,
         ECAL = cms.PSet(
