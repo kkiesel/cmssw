@@ -73,7 +73,7 @@ ECALScaleFactorCalculator::ECALScaleFactorCalculator(const edm::ParameterSet& iC
 {
 
   // Check for gaps in eta
-  etaGaps = file->make<TH2F>("etaGaps", ";#eta_{gen};E/E_{gen}", 3000, 0, 3, 1000, 5, 1005 );
+  etaGaps = file->make<TH2F>("etaGaps", ";#eta_{gen};", 3000, 0, 3, 1000, 5, 1005 );
 
   simHitMap = file->make<TH2F>("hitMap", "hitmap;#eta;#phi", 1000, -3, 3, 1000, -3.5, 3.5 );
 
@@ -82,8 +82,8 @@ ECALScaleFactorCalculator::ECALScaleFactorCalculator(const edm::ParameterSet& iC
 
   // This 3D histogram is used for calculating the scale factors, the gaps are obmitted
   responseVsEVsEta_woGaps = file->make<TH3F>("responseVsEVsEta_woGaps", ";E_{gen};#eta_{gen};E/E_{gen}", 100, 5, 1005, 400, 0, 3.2, 2000, 0, 1.05 );
-  responseVsEVsEta_woGaps3 = file->make<TH3F>("responseVsEVsEta_woGaps3", ";E_{gen};#eta_{gen};E^{3x3}/E_{gen}", 100, 5, 1005, 400, 0, 3.2, 2000, 0, 1.05 );
-  responseVsEVsEta_woGaps5 = file->make<TH3F>("responseVsEVsEta_woGaps5", ";E_{gen};#eta_{gen};E^{5x5}/E_{gen}", 100, 5, 1005, 400, 0, 3.2, 2000, 0, 1.05 );
+  responseVsEVsEta_woGaps3 = file->make<TH3F>("responseVsEVsEta_woGaps3", ";E_{gen};#eta_{gen};E/E_{gen}", 100, 5, 1005, 400, 0, 3.2, 2000, 0, 1.05 );
+  responseVsEVsEta_woGaps5 = file->make<TH3F>("responseVsEVsEta_woGaps5", ";E_{gen};#eta_{gen};E/E_{gen}", 100, 5, 1005, 400, 0, 3.2, 2000, 0, 1.05 );
 
 
   sEtaEtaVsEVsEta_woGaps = file->make<TH3F>("sEtaEtaVsEVsEta_woGaps", ";E_{gen};#eta_{gen};#sigma_{#eta#eta}", 100, 5, 1005, 400, 0, 3.2, 2000, 0, 0.1 );

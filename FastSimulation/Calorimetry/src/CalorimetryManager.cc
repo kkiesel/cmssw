@@ -554,8 +554,26 @@ std::map<CaloHitID,float> CalorimetryManager::applyECALScaleFactor(
   float genEavailable = ecalScalesAuxiliaryGenEFinder_->GetBinContent(
                           ecalScalesAuxiliaryGenEFinder_->FindFixBin( genE ) );
 
-  int bin = ecalScales_->FindFixBin( genEavailable, genEta, simE/genE );
-  float scale = ecalScales_->GetBinContent( bin );
+  float r = simE/genE;
+
+  auto rAxis = ecalScales_->GetZaxis();
+  auto binWidth = rAxis->GetBinWidth(1);
+  auto rMin = rAxis->GetXmin();
+  auto rMax = rAxis->GetXmax();
+
+  auto scale = 1.;
+
+  if( r-binWidth/2. > rMin && r+binWidth/2. < rMax ) {
+
+    // make a linear extrapolation between neighbour bins
+    auto scale1 = ecalScales_->GetBinContent( ecalScales_->FindFixBin( genEavailable, genEta, r - binWidth/2. ) );
+    auto scale2 = ecalScales_->GetBinContent( ecalScales_->FindFixBin( genEavailable, genEta, r + binWidth/2. ) );
+
+    auto r1 = rAxis->GetBinCenter( rAxis->FindFixBin( r - binWidth/2. ) );
+    auto r2 = rAxis->GetBinCenter( rAxis->FindFixBin( r + binWidth/2. ) );
+    scale = ( scale1 * ( r2 - r ) + scale2 * ( r - r1 ) ) / binWidth;
+
+  }
 
   // If the scale is unreasonable small, e.g. zero, do not scale
   if( scale < 0.000001 ) scale = 1;

@@ -33,8 +33,8 @@ else:
     from fullFileList import filelist
 
 # only e=30:
-#filelist = [ x for x in filelist if "_E30_" in x ]
-#options.outputFile += "_E30"
+filelist = [ x for x in filelist if "_E30_" in x ]
+options.outputFile += "_E30"
 ### end only 30
 
 half = int( options.half )
